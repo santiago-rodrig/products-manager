@@ -5,9 +5,11 @@ import reduxPoweredWindow from './store.d'
 
 const store = createStore(
     reducer,
-    compose(applyMiddleware(thunk),
-        reduxPoweredWindow.__REDUX_DEVTOOLS_EXTENSION__ ?
-        reduxPoweredWindow.__REDUX_DEVTOOLS_EXTENSION__() : (f: Function) => f
+    compose(
+        applyMiddleware(thunk),
+        reduxPoweredWindow.__REDUX_DEVTOOLS_EXTENSION__
+            ? reduxPoweredWindow.__REDUX_DEVTOOLS_EXTENSION__()
+            : (f: Function) => f
     )
 )
 
