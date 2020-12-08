@@ -1,8 +1,20 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 
-const Productos = () => {
+const Productos: React.FC = () => {
     return (
-        <h1>Productos component</h1>
+        <Fragment>
+            <h2 className={'text-center my-5'}>Listado de Productos</h2>
+            <table className={'table table-striped'}>
+                <thead className={'bg-primary table-dark'}>
+                <tr>
+                    <th scope={'col'} className={'text-center'}>Nombre</th>
+                    <th scope={'col'} className={'text-center'}>Precio</th>
+                    <th scope={'col'} className={'text-center'}>Acciones</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </Fragment>
     )
 }
 
