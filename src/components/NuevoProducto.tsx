@@ -11,7 +11,8 @@ const NuevoProducto = () => {
     const dispatch = useDispatch()
 
     // adds a new product to the products state
-    const agregarProducto = () => dispatch(crearNuevoProducto({ nombre, precio }))
+    const agregarProducto = () =>
+        dispatch(crearNuevoProducto({ nombre, precio }))
 
     // handles the form submit event
     const handleSubmit = (event: FormEvent) => {
