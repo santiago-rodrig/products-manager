@@ -1,5 +1,5 @@
-import React, { FormEvent, useState, ChangeEvent } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { FormEvent, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { crearNuevoProducto } from '../actions/productos'
 
 const NuevoProducto = () => {

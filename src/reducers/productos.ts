@@ -13,7 +13,7 @@ const initialState = {
     loading: false,
 }
 
-export default function (state = initialState, action: Action) {
+export default function productosReducer(state = initialState, action: Action) {
     switch (action.type) {
         case AGREGAR_PRODUCTO:
             return {
