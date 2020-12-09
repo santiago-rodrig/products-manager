@@ -5,10 +5,13 @@ import {
     OBTENER_PRODUCTOS,
     OBTENER_PRODUCTOS_EXITO,
     OBTENER_PRODUCTOS_ERROR,
+    ELIMINAR_PRODUCTO,
+    ELIMINAR_PRODUCTO_EXITO,
+    ELIMINAR_PRODUCTO_ERROR,
 } from './types'
 
 import { Dispatch } from 'redux'
-import axiosClient from "../config/axios";
+import axiosClient from '../config/axios'
 import Swal from 'sweetalert2'
 
 export type Producto = {
@@ -25,9 +28,15 @@ export function crearNuevoProducto(producto: Producto) {
         try {
             await axiosClient.post('/productos', producto)
             dispatch(agregarProductoExito(producto))
-            Swal.fire('Correcto', 'El producto se ha creado correctamente', 'success')
+            Swal.fire(
+                'Correcto',
+                'El producto se ha creado correctamente',
+                'success'
+            )
         } catch (error) {
-            dispatch(agregarProductoError({ msg: 'No se pudo crear el producto' }))
+            dispatch(
+                agregarProductoError({ msg: 'No se pudo crear el producto' })
+            )
             Swal.fire('Error', 'No se pudo crear el producto', 'error')
         }
     }
@@ -44,7 +53,7 @@ const agregarProductoExito = (producto: Producto) => ({
 
 const agregarProductoError = (error: { msg: string }) => ({
     type: AGREGAR_PRODUCTO_ERROR,
-    payload: error
+    payload: error,
 })
 
 // Obtener los productos
@@ -57,21 +66,55 @@ export function obtenerProductos() {
             const productos = response.data
             dispatch(obtenerProductosExito(productos))
         } catch (_) {
-            dispatch(obtenerProductosError({ msg: 'No se pudieron obtener los productos' }))
+            dispatch(
+                obtenerProductosError({
+                    msg: 'No se pudieron obtener los productos',
+                })
+            )
         }
     }
 }
 
 const obtenerProductosComienzo = () => ({
-    type: OBTENER_PRODUCTOS
+    type: OBTENER_PRODUCTOS,
 })
 
 const obtenerProductosExito = (productos: Producto[]) => ({
     type: OBTENER_PRODUCTOS_EXITO,
-    payload: productos
+    payload: productos,
 })
 
 const obtenerProductosError = (error: { msg: string }) => ({
     type: OBTENER_PRODUCTOS_ERROR,
-    payload: error
+    payload: error,
+})
+
+// Eliminar producto
+export function eliminarProducto(id: number) {
+    return async (dispatch: Dispatch) => {
+        dispatch(eliminarProductoComienzo())
+
+        try {
+            await axiosClient.delete(`/productos/${id}`)
+            dispatch(eliminarProductoExito(id))
+        } catch (_) {
+            dispatch(
+                elminarProductoError({ msg: 'No se pudo eliminar el producto' })
+            )
+        }
+    }
+}
+
+const eliminarProductoComienzo = () => ({
+    type: ELIMINAR_PRODUCTO,
+})
+
+const eliminarProductoExito = (id: number) => ({
+    type: ELIMINAR_PRODUCTO_EXITO,
+    payload: id,
+})
+
+const elminarProductoError = (error: { msg: string }) => ({
+    type: ELIMINAR_PRODUCTO_ERROR,
+    payload: error,
 })

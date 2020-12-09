@@ -8,12 +8,15 @@ import {
     OBTENER_PRODUCTOS,
     OBTENER_PRODUCTOS_EXITO,
     OBTENER_PRODUCTOS_ERROR,
+    ELIMINAR_PRODUCTO,
+    ELIMINAR_PRODUCTO_EXITO,
+    ELIMINAR_PRODUCTO_ERROR,
 } from '../actions/types'
 
 // cada reducer tiene su propio state
 const initialState: {
-    productos: Producto[],
-    error: { msg: string } | null,
+    productos: Producto[]
+    error: { msg: string } | null
     loading: boolean
 } = {
     productos: [],
@@ -23,6 +26,27 @@ const initialState: {
 
 export default function productosReducer(state = initialState, action: Action) {
     switch (action.type) {
+        case ELIMINAR_PRODUCTO:
+            return {
+                ...state,
+                loading: true,
+                error: null,
+            }
+        case ELIMINAR_PRODUCTO_EXITO:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                productos: state.productos.filter(
+                    (producto) => producto.id !== action.payload
+                ),
+            }
+        case ELIMINAR_PRODUCTO_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            }
         case AGREGAR_PRODUCTO:
             return {
                 ...state,
@@ -53,13 +77,13 @@ export default function productosReducer(state = initialState, action: Action) {
                 ...state,
                 loading: false,
                 error: null,
-                productos: action.payload
+                productos: action.payload,
             }
         case OBTENER_PRODUCTOS_ERROR:
             return {
                 ...state,
                 loading: false,
-                error: action.payload
+                error: action.payload,
             }
         default:
             return state

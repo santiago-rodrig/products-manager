@@ -12,7 +12,9 @@ const NuevoProducto = ({ history }: RouteChildrenProps) => {
     const dispatch = useDispatch()
 
     // getting values from the store
-    const loading = useSelector((state: { productos: { loading: boolean }}) => state.productos.loading)
+    const loading = useSelector(
+        (state: { productos: { loading: boolean } }) => state.productos.loading
+    )
 
     // adds a new product to the products state
     const agregarProducto = () =>
