@@ -44,6 +44,11 @@
       "nombre": "Rip Eye",
       "precio": 400,
       "id": 9
+    },
+    {
+      "nombre": "Rip Eye 4 Kg",
+      "precio": 300,
+      "id": 10
     }
   ]
 }

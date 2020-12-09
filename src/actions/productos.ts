@@ -6,6 +6,7 @@ import {
 
 import { Dispatch } from 'redux'
 import axiosClient from "../config/axios";
+import Swal from 'sweetalert2'
 
 export type Producto = {
     nombre: string
@@ -20,8 +21,10 @@ export function crearNuevoProducto(producto: Producto) {
         try {
             await axiosClient.post('/productos', producto)
             dispatch(agregarProductoExito(producto))
+            Swal.fire('Correcto', 'El proyecto se ha creado correctamente', 'success')
         } catch (error) {
             dispatch(agregarProductoError({ msg: 'No se pudo crear el proyecto' }))
+            Swal.fire('Error', 'No se pudo crear el proyecto', 'error')
         }
     }
 }

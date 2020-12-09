@@ -1,8 +1,9 @@
 import React, { FormEvent, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { crearNuevoProducto } from '../actions/productos'
+import { RouteChildrenProps } from 'react-router-dom'
 
-const NuevoProducto = () => {
+const NuevoProducto = ({ history }: RouteChildrenProps) => {
     // component's state
     const [nombre, guardarNombre] = useState<string>('')
     const [precio, guardarPrecio] = useState<number>(-1)
@@ -12,7 +13,6 @@ const NuevoProducto = () => {
 
     // getting values from the store
     const loading = useSelector((state: { productos: { loading: boolean }}) => state.productos.loading)
-    const error = useSelector((state: { productos: { error: { msg: string } | null }}) => state.productos.error)
 
     // adds a new product to the products state
     const agregarProducto = () =>
@@ -29,6 +29,7 @@ const NuevoProducto = () => {
 
         // create the product
         agregarProducto()
+        history.push('/')
     }
 
     return (
@@ -73,7 +74,6 @@ const NuevoProducto = () => {
                                 Agregar
                             </button>
                             {loading ? 'Cargando...' : null}
-                            {error ? <p className={'alert alert-danger p2 mt-4 text-center'}>{error.msg}</p> : null}
                         </form>
                     </div>
                 </div>
