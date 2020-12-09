@@ -1,4 +1,5 @@
 import { Action } from './productos.d'
+import { Producto } from '../actions/productos'
 
 import {
     AGREGAR_PRODUCTO,
@@ -7,7 +8,11 @@ import {
 } from '../actions/types'
 
 // cada reducer tiene su propio state
-const initialState = {
+const initialState: {
+    productos: Producto[],
+    error: { msg: string } | null,
+    loading: boolean
+} = {
     productos: [],
     error: null,
     loading: false,

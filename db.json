@@ -24,6 +24,16 @@
       "nombre": "Jugo de Fresa",
       "precio": "200",
       "id": 5
+    },
+    {
+      "nombre": "Guayaba 2 Kg",
+      "precio": 300,
+      "id": 6
+    },
+    {
+      "nombre": "Melon 4 Kg",
+      "precio": 200,
+      "id": 7
     }
   ]
 }
