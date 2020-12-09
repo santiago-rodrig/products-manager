@@ -34,6 +34,16 @@
       "nombre": "Melon 4 Kg",
       "precio": 200,
       "id": 7
+    },
+    {
+      "nombre": "Melon 4 Kg",
+      "precio": 200,
+      "id": 8
+    },
+    {
+      "nombre": "Rip Eye",
+      "precio": 400,
+      "id": 9
     }
   ]
 }
