@@ -8,6 +8,9 @@ import {
     ELIMINAR_PRODUCTO,
     ELIMINAR_PRODUCTO_EXITO,
     ELIMINAR_PRODUCTO_ERROR,
+    UPDATE_PRODUCT_COMIENZO,
+    UPDATE_PRODUCT_ERROR,
+    UPDATE_PRODUCT_EXITO,
 } from './types'
 
 import { Dispatch } from 'redux'
@@ -116,5 +119,34 @@ const eliminarProductoExito = (id: number) => ({
 
 const elminarProductoError = (error: { msg: string }) => ({
     type: ELIMINAR_PRODUCTO_ERROR,
+    payload: error,
+})
+
+export function editarProducto(producto: Producto) {
+    return async (dispatch: Dispatch) => {
+        dispatch(editarProductoComienzo())
+
+        try {
+            await axiosClient.put(`/productos/${producto.id}`, producto)
+            dispatch(editarProductoExito(producto))
+        } catch {
+            dispatch(
+                editarProductoError({ msg: 'No se pudo editar el producto' })
+            )
+        }
+    }
+}
+
+const editarProductoComienzo = () => ({
+    type: UPDATE_PRODUCT_COMIENZO,
+})
+
+const editarProductoExito = (producto: Producto) => ({
+    type: UPDATE_PRODUCT_EXITO,
+    payload: producto,
+})
+
+const editarProductoError = (error: { msg: string }) => ({
+    type: UPDATE_PRODUCT_ERROR,
     payload: error,
 })

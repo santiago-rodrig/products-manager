@@ -11,6 +11,9 @@ import {
     ELIMINAR_PRODUCTO,
     ELIMINAR_PRODUCTO_EXITO,
     ELIMINAR_PRODUCTO_ERROR,
+    UPDATE_PRODUCT_COMIENZO,
+    UPDATE_PRODUCT_EXITO,
+    UPDATE_PRODUCT_ERROR,
 } from '../actions/types'
 
 // cada reducer tiene su propio state
@@ -26,6 +29,29 @@ const initialState: {
 
 export default function productosReducer(state = initialState, action: Action) {
     switch (action.type) {
+        case UPDATE_PRODUCT_COMIENZO:
+            return {
+                ...state,
+                loading: true,
+                error: null,
+            }
+        case UPDATE_PRODUCT_EXITO:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                productos: state.productos.map((producto) =>
+                    producto.id === action.payload.id
+                        ? action.payload
+                        : producto
+                ),
+            }
+        case UPDATE_PRODUCT_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            }
         case ELIMINAR_PRODUCTO:
             return {
                 ...state,
