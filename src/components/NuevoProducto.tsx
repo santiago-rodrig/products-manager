@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { crearNuevoProducto } from '../actions/productos'
 import { RouteChildrenProps } from 'react-router-dom'
-import { mostrarAlerta } from '../actions/alertas'
+import { mostrarAlerta, ocultarAlerta } from '../actions/alertas'
 
 const NuevoProducto = ({ history }: RouteChildrenProps) => {
     // component's state
@@ -40,6 +40,7 @@ const NuevoProducto = ({ history }: RouteChildrenProps) => {
         }
 
         // create the product
+        dispatch(ocultarAlerta())
         agregarProducto()
         history.push('/')
     }

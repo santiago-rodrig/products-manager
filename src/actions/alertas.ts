@@ -9,7 +9,6 @@ export const mostrarAlerta = (alerta: Alerta) => ({
     payload: alerta
 })
 
-export const ocultarAlerta = (alerta: Alerta) => ({
-    type: OCULTAR_ALERTA,
-    payload: alerta
+export const ocultarAlerta = () => ({
+    type: OCULTAR_ALERTA
 })

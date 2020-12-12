@@ -17,7 +17,7 @@ export default function alertasReducer(state = initialState, action: { type: str
         case OCULTAR_ALERTA:
             return {
                 ...state,
-                alerta: action.payload
+                alerta: null
             }
         default:
             return state
