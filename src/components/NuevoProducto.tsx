@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { crearNuevoProducto } from '../actions/productos'
 import { RouteChildrenProps } from 'react-router-dom'
-import { mostrarAlerta } from "../actions/alertas";
+import { mostrarAlerta } from '../actions/alertas'
 
 const NuevoProducto = ({ history }: RouteChildrenProps) => {
     // component's state
@@ -17,6 +17,11 @@ const NuevoProducto = ({ history }: RouteChildrenProps) => {
         (state: { productos: { loading: boolean } }) => state.productos.loading
     )
 
+    const alerta = useSelector(
+        (state: { alertas: { alerta: { msg: string } | null } }) =>
+            state.alertas.alerta
+    )
+
     // adds a new product to the products state
     const agregarProducto = () =>
         dispatch(crearNuevoProducto({ nombre, precio }))
@@ -27,8 +32,10 @@ const NuevoProducto = ({ history }: RouteChildrenProps) => {
 
         // validates the form input
         if (nombre.trim() === '' || precio < 0) {
-            dispatch(mostrarAlerta({ msg: 'Todos los campos son obligatorios' }))
-            
+            dispatch(
+                mostrarAlerta({ msg: 'Todos los campos son obligatorios' })
+            )
+
             return
         }
 
@@ -45,6 +52,11 @@ const NuevoProducto = ({ history }: RouteChildrenProps) => {
                         <h2 className={'text-center mb-4 font-weight-bold'}>
                             Agregar Nuevo Producto
                         </h2>
+                        {alerta ? (
+                            <p className="alert alert-danger text-center text-uppercase p-3">
+                                {alerta.msg}
+                            </p>
+                        ) : null}
                         <form onSubmit={handleSubmit}>
                             <div className={'form-group'}>
                                 <label>Nombre Producto</label>
