@@ -39,6 +39,11 @@
       "nombre": "Rip Eye 4 Kg",
       "precio": 300,
       "id": 10
+    },
+    {
+      "nombre": "Guanabanas 4 Kg",
+      "precio": 500,
+      "id": 11
     }
   ]
 }
